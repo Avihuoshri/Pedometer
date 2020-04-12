@@ -1,5 +1,7 @@
 package com.magicdate.pesometer;
 
+import java.util.ArrayList;
+
 public class stepDetector {
 
     private static final int ACCEL_RING_SIZE = 50;
@@ -20,6 +22,9 @@ public class stepDetector {
     private float oldVelocityEstimate = 0;
 
     private StepListener listener;
+
+    private ArrayList<Float> degrees = new ArrayList<Float>();
+    private float degree;
 
     public void registerListener(StepListener listener) {
         this.listener = listener;
@@ -59,7 +64,16 @@ public class stepDetector {
                 && (timeNs - lastStepTimeNs > STEP_DELAY_NS)) {
             listener.step(timeNs);
             lastStepTimeNs = timeNs;
+            degrees.add(degree);
         }
         oldVelocityEstimate = velocityEstimate;
+    }
+
+    public String getDegrees(){
+        return degrees.toString();
+    }
+
+    public void setDegree(float value) {
+        degree = (float) Math.round(value);
     }
 }
