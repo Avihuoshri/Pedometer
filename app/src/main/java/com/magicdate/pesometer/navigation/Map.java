@@ -1,4 +1,4 @@
-package com.magicdate.pesometer;
+package com.magicdate.pesometer.navigation;
 
 import java.util.ArrayList;
 

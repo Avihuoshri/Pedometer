@@ -1,4 +1,4 @@
-package com.magicdate.pesometer;
+package com.magicdate.pesometer.navigation;
 
 public class Point {
     private int i;

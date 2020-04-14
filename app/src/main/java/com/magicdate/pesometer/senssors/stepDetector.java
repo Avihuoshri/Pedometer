@@ -1,4 +1,6 @@
-package com.magicdate.pesometer;
+package com.magicdate.pesometer.senssors;
+
+import com.magicdate.pesometer.StepListener;
 
 import java.util.ArrayList;
 

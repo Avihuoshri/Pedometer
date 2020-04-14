@@ -1,6 +1,6 @@
-package com.magicdate.pesometer;
+package com.magicdate.pesometer.navigation;
 
-class RouteLinkedList {// Double Cycle Linked List
+public class RouteLinkedList {// Double Cycle Linked List
 
     public Node head, tail;
     private int size;

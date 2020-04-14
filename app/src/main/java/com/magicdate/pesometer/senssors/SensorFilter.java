@@ -1,4 +1,4 @@
-package com.magicdate.pesometer;
+package com.magicdate.pesometer.senssors;
 
 public class SensorFilter {
 
