@@ -1,9 +1,12 @@
 package com.magicdate.pesometer.navigation;
 
+import android.util.Log;
+
 public class RouteLinkedList {// Double Cycle Linked List
 
     public Node head, tail;
     private int size;
+
     // Constructor,  constructs an empty list
     public RouteLinkedList(){
         head = tail = null;
@@ -18,22 +21,27 @@ public class RouteLinkedList {// Double Cycle Linked List
             head =new  Node(route, prev, next);
             tail = head;
             head.next = head.prev = tail;
+
         }
         else
         {
-            Route n = new Route();
-            tail.next.setRoute(n);
-            tail.setRoute(n);
+            Node n = new Node(route, tail, head);
+            tail.next = n;
+            tail = n;
             head.prev = tail;
         }
         size++;
+
     }
+
     public Node getHead(){
         return head;
     }
+
     public Node getNext(Node n){
         return n.next;
     }
+
     public String toString(){
         String s = "[";
         if (head != null){
@@ -45,4 +53,6 @@ public class RouteLinkedList {// Double Cycle Linked List
         }
         return s+"]";
     }
+
+
 }

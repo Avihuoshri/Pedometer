@@ -1,5 +1,7 @@
 package com.magicdate.pesometer.navigation;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -21,36 +23,40 @@ public class Route implements List<Point> {
 
     public Route() {
         this.points = new ArrayList<Point>();
-        this.size = points.size();
     }
 
     //convert degree that comes from the senssor to point on the route
     public Point DegreeToPoint(float degree){
-
+        int i = 1000;
+        int j = 1000;
         //get the coordinate of the lest point on the route
-        int i = points.get(size-1).getI();
-        int j = points.get(size-1).getJ();
+        if(points.size() != 0) {
 
-        //not a valid degree
-        if(degree < 0 || degree > 360){
-            return null;
+             i = points.get(size-1).getI();
+             j = points.get(size-1).getJ();
+
+            //not a valid degree
+            if (degree < 0 || degree > 360) {
+                return null;
+            }
+            //go up on the map
+            else if (degree < 45 || degree > 315) {
+                return new Point(i - 1, j);
+            }
+            //go up right the map
+            else if (degree < 135) {
+                return new Point(i, j + 1);
+            }
+            //go down on the map
+            else if (degree < 225) {
+                return new Point(i + 1, j);
+            }
+            //go left on the map
+            else {
+                return new Point(i, j - 1);
+            }
         }
-        //go up on the map
-        else if(degree < 45 || degree > 315){
-            return new Point(i-1,j);
-        }
-        //go up right the map
-        else if(degree < 135){
-            return new Point(i,j+1);
-        }
-        //go down on the map
-        else if(degree < 225){
-            return new Point(i+1,j);
-        }
-        //go left on the map
-        else{
-            return new Point(i,j-1);
-        }
+        return  new Point(i,j);
     }
 
     //add new point on the route by the step direction
@@ -59,10 +65,21 @@ public class Route implements List<Point> {
         this.add(newPoint);
     }
 
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "points=" + points.toString() +
+                ", size=" + size +
+                '}';
+    }
+
+
     @Override
     public boolean add(Point point) {
         try{
             points.add(point);
+            size++;
             return true;
         }
         catch (Exception e){

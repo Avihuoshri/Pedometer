@@ -6,10 +6,10 @@ public class Node {
     private String source, destination;
 
     public Node(Route route, Node prev, Node next){
-        this.route = new Route();
+        this.route = route;
         this.next = next;
         this.prev = prev;
-        this.source = prev.destination;
+        //this.source = prev.destination;
 
     }
 
@@ -29,7 +29,7 @@ public class Node {
 
     public Node getPrev(){ return this.prev; }
 
-    public String toString(){ return ""+this.route; }
+    public String toString(){ return " "+this.route.toString() + " "; }
 
 
 

@@ -6,7 +6,7 @@ import com.magicdate.pesometer.navigation.RouteLinkedList;
 public interface Record{
 
     //initialize new list of routes.
-    public RouteLinkedList initList();
+    public void initList();
 
     //save product point on the map
     public Point saveProductLocationToDB(Point point, String name);

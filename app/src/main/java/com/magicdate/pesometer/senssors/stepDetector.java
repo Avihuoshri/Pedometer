@@ -1,6 +1,7 @@
 package com.magicdate.pesometer.senssors;
 
-import com.magicdate.pesometer.StepListener;
+import com.magicdate.pesometer.interfaces.StepListener;
+import com.magicdate.pesometer.interfaces.StepListener;
 
 import java.util.ArrayList;
 
@@ -71,8 +72,8 @@ public class stepDetector {
         oldVelocityEstimate = velocityEstimate;
     }
 
-    public String getDegrees(){
-        return degrees.toString();
+    public ArrayList<Float> getDegrees(){
+        return degrees;
     }
 
     public void setDegree(float value) {

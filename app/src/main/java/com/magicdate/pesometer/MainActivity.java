@@ -7,11 +7,17 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.magicdate.pesometer.interfaces.StepListener;
+import com.magicdate.pesometer.navigation.Route;
+import com.magicdate.pesometer.navigation.RouteTracker;
+import com.magicdate.pesometer.senssors.stepDetector;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -19,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
@@ -34,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private int numSteps;
     private static final String FILE_NAME = "degrees.txt";
     EditText mEditText;
+
+    RouteTracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,21 +63,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         BtnStop = (Button) findViewById(R.id.btn_stop);
         mEditText = findViewById(R.id.edit_text);
 
+        tracker = new RouteTracker();
+        tracker.initList();
+
         BtnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 numSteps = 0;
                 sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
                 sensorManagerComp.registerListener(MainActivity.this, compass, SensorManager.SENSOR_DELAY_GAME);
-
             }
         });
+
 
 
         BtnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sensorManager.unregisterListener(MainActivity.this);
+                ArrayList<Float> degrees = simpleStepDetector.getDegrees();
+                tracker.saveRoute(degrees);
             }
         });
 
@@ -98,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvSteps.setText(TEXT_NUM_STEPS + numSteps);
     }
 
+    /*
     public void save(View v) {
         String text = simpleStepDetector.getDegrees();
 
@@ -123,11 +138,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         }
     }
+     */
 
     public void load(View v) {
+        /*
         FileInputStream fis = null;
 
         try {
+
             fis = openFileInput(FILE_NAME);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
@@ -153,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         }
+*/
+        mEditText.setText(tracker.toString() + System.lineSeparator());
     }
 
 }
