@@ -13,55 +13,43 @@ public class RouteTracker implements Record, Navigate {
     public RouteLinkedList list;
 
     public RouteTracker(){
-        firstPoint = new Point(1000,1000);
-        firstRoute = new Route();
-        list = new RouteLinkedList();
-
     }
 
     @Override
     public void initList() {
+        firstPoint = new Point(1000,1000);
+        firstRoute = new Route();
+        list = new RouteLinkedList();
+
         firstRoute.add(firstPoint);
         list.add(firstRoute);
-
+        list.head.setSource("enter");
     }
 
-    /*
-    //is mandatory to call the initList method **before** this method.
-    public Route initRoute() {
+    public void saveRoute(ArrayList<Float> degrees, String destination) {
 
-        //get the prev route
-        Route lastRoute = list.tail.getRoute();
-
-        //get the last point in the last route
+        //get last point
+        Route lastRoute= list.tail.getRoute();
         int lastRouteSize = lastRoute.size();
-        Point lastRoutePoint = lastRoute.get(lastRouteSize);
+        Point lastPoint = lastRoute.getPoints().get(lastRouteSize-1);
 
-        //In case we want to create the first route in the list.
-        if(lastRoutePoint.getI() == 0 && lastRoutePoint.getJ() ==0 ){
-            lastRoutePoint.setI(1000);
-            lastRoutePoint.setJ(1000);
-        }
-
-        //initialize new route with the last point
-        //from prev route as the first point of
-        //the current route
-
-        Route newRoute = new Route();
-        newRoute.add(lastRoutePoint);
-
-        return newRoute;
-    }
-    */
-
-    public void saveRoute(ArrayList<Float> degrees) {
+        //set first point of new route
         Route route = new Route();
+        route.add(lastPoint);
+
+        //add points to new route
         for(int i = 0; i<degrees.size(); i++){
             Point point = route.DegreeToPoint(degrees.get(i));
             route.add(point);
         }
+
         list.add(route);
-        Log.d("first route ", list.toString());
+
+        //set source and destination
+        String source = list.tail.prev.getDestination();
+        list.tail.setSource(source);
+        list.tail.setDestination(destination);
+
     }
 
     @Override
@@ -69,6 +57,10 @@ public class RouteTracker implements Record, Navigate {
         return "RouteTracker{" +
                 "list=" + list.toString() +
                 '}';
+    }
+
+    public String ProductsToString() {
+        return list.sourceDestToString();
     }
 
     @Override
@@ -95,4 +87,6 @@ public class RouteTracker implements Record, Navigate {
     public Point saveProductLocationToDB(Point point, String name) {
         return null;
     }
+
+
 }

@@ -55,4 +55,15 @@ public class RouteLinkedList {// Double Cycle Linked List
     }
 
 
+    public String sourceDestToString() {
+        String s = "[";
+        if (head != null){
+            s = s + head.getSource() + " -> " + head.getDestination() + ", ";
+            for (Node n = head.next; n != head; n=n.next){
+                s = s + n.getSource() + " -> " + n.getDestination() + ", ";
+            }
+            s = s.substring(0, s.length()-2);
+        }
+        return s+"]";
+    }
 }

@@ -2,12 +2,16 @@ package com.magicdate.pesometer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +34,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
     private TextView TvSteps;
-    private  Button BtnStart ;
-    private  Button BtnStop ;
+    private  Button BtnNext ;
+    private  Button BtnTake ;
+    private  Button BtnSave ;
+    private  Button BtnShowRoute ;
+    private Button BtnShowProducts;
     private stepDetector simpleStepDetector;
     private SensorManager sensorManager;
     private SensorManager sensorManagerComp;
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private int numSteps;
     private static final String FILE_NAME = "degrees.txt";
     EditText mEditText;
+    EditText mEditTextProduct;
 
     RouteTracker tracker;
 
@@ -49,24 +57,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initSenssors();
 
-        // Get an instance of the SensorManager
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensorManagerComp = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        compass = sensorManagerComp.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-        simpleStepDetector = new stepDetector();
-        simpleStepDetector.registerListener(this);
+        initButtons();
 
-        TvSteps = (TextView) findViewById(R.id.tv_steps);
-         BtnStart = (Button) findViewById(R.id.btn_start);
-        BtnStop = (Button) findViewById(R.id.btn_stop);
-        mEditText = findViewById(R.id.edit_text);
-
-        tracker = new RouteTracker();
-        tracker.initList();
-
-        BtnStart.setOnClickListener(new View.OnClickListener() {
+        BtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 numSteps = 0;
@@ -76,17 +71,55 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         });
 
 
-
-        BtnStop.setOnClickListener(new View.OnClickListener() {
+        BtnTake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sensorManager.unregisterListener(MainActivity.this);
                 ArrayList<Float> degrees = simpleStepDetector.getDegrees();
-                tracker.saveRoute(degrees);
+                String destination = mEditTextProduct.getText().toString();
+                tracker.saveRoute(degrees, destination);
+            }
+        });
+
+        BtnShowRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditText.setText(tracker.toString() + System.lineSeparator() + System.lineSeparator());
+            }
+        });
+
+        BtnShowProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditText.setText(tracker.ProductsToString() + System.lineSeparator() + System.lineSeparator());
             }
         });
 
 
+    }
+
+
+    private void initSenssors(){
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManagerComp = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        compass = sensorManagerComp.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        simpleStepDetector = new stepDetector();
+        simpleStepDetector.registerListener(this);
+
+        tracker = new RouteTracker();
+        tracker.initList();
+
+    }
+
+    private void initButtons(){
+        TvSteps = findViewById(R.id.tv_steps);
+        BtnNext = findViewById(R.id.btn_start);
+        BtnTake = findViewById(R.id.btn_stop);
+        BtnShowRoute = findViewById(R.id.button_show_route);
+        BtnShowProducts = findViewById(R.id.button_Show_products);
+        mEditText = findViewById(R.id.edit_text);
+        mEditTextProduct = findViewById(R.id.edit_text_product);
 
     }
 
@@ -138,10 +171,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         }
     }
-     */
+
 
     public void load(View v) {
-        /*
+
         FileInputStream fis = null;
 
         try {
@@ -171,8 +204,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             }
         }
-*/
+
         mEditText.setText(tracker.toString() + System.lineSeparator());
     }
+      */
+
 
 }
