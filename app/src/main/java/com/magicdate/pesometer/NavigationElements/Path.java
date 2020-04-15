@@ -1,26 +1,11 @@
-package com.magicdate.pesometer.navigation;
-
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+package com.magicdate.pesometer.NavigationElements;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
-import java.util.stream.Stream;
 
-public class Route  {
+public class Path {
     private ArrayList<Point> points;
 
-    public Route() {
+    public Path() {
         this.points = new ArrayList<>();
     }
 
@@ -85,7 +70,7 @@ public class Route  {
     }
 
     public String toString() {
-        return "Route{" +
+        return "Path{" +
                 "points=" + points.toString() +
                 ", size=" + points.size() +
                 '}';

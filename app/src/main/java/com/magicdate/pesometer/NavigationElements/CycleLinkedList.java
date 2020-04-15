@@ -1,31 +1,29 @@
-package com.magicdate.pesometer.navigation;
+package com.magicdate.pesometer.NavigationElements;
 
-import android.util.Log;
+public class CycleLinkedList {// Double Cycle Linked List
 
-public class RouteLinkedList {// Double Cycle Linked List
-
-    public Node head, tail;
+    public PathNode head, tail;
     private int size;
 
     // Constructor,  constructs an empty list
-    public RouteLinkedList(){
+    public CycleLinkedList(){
         head = tail = null;
         size = 0;
     }
 
     // Appends the specified element to the end of this list.
-    public void add(Route route){
-        Node prev= null,next = null;
+    public void add(Path path){
+        PathNode prev= null,next = null;
         if (head == null)
         {
-            head =new  Node(route, prev, next);
+            head =new PathNode(path, prev, next);
             tail = head;
             head.next = head.prev = tail;
 
         }
         else
         {
-            Node n = new Node(route, tail, head);
+            PathNode n = new PathNode(path, tail, head);
             tail.next = n;
             tail = n;
             head.prev = tail;
@@ -34,11 +32,11 @@ public class RouteLinkedList {// Double Cycle Linked List
 
     }
 
-    public Node getHead(){
+    public PathNode getHead(){
         return head;
     }
 
-    public Node getNext(Node n){
+    public PathNode getNext(PathNode n){
         return n.next;
     }
 
@@ -46,7 +44,7 @@ public class RouteLinkedList {// Double Cycle Linked List
         String s = "[";
         if (head != null){
             s = s + head.toString() + ", ";
-            for (Node n = head.next; n != head; n=n.next){
+            for (PathNode n = head.next; n != head; n=n.next){
                 s = s + n.toString() + ", ";
             }
             s = s.substring(0, s.length()-2);
@@ -59,7 +57,7 @@ public class RouteLinkedList {// Double Cycle Linked List
         String s = "[";
         if (head != null){
             s = s + head.getSource() + " -> " + head.getDestination() + ", ";
-            for (Node n = head.next; n != head; n=n.next){
+            for (PathNode n = head.next; n != head; n=n.next){
                 s = s + n.getSource() + " -> " + n.getDestination() + ", ";
             }
             s = s.substring(0, s.length()-2);

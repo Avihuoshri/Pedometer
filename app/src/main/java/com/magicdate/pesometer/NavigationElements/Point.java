@@ -1,4 +1,4 @@
-package com.magicdate.pesometer.navigation;
+package com.magicdate.pesometer.NavigationElements;
 
 public class Point {
     private int i;
@@ -7,6 +7,11 @@ public class Point {
     public Point(int i, int j){
         this.i = i;
         this.j = j;
+    }
+
+    public Point(Point point) {
+        this.i = point.i;
+        this.j = point.j;
     }
 
     public void setI(int i) {

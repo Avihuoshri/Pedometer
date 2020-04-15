@@ -1,49 +1,47 @@
-package com.magicdate.pesometer.navigation;
-
-import android.util.Log;
+package com.magicdate.pesometer.NavigationElements;
 
 import com.magicdate.pesometer.interfaces.Navigate;
 import com.magicdate.pesometer.interfaces.Record;
 
 import java.util.ArrayList;
 
-public class RouteTracker implements Record, Navigate {
+public class PathTracker implements Record, Navigate {
     public Point firstPoint;
-    public Route firstRoute;
-    public RouteLinkedList list;
+    public Path firstPath;
+    public CycleLinkedList list;
 
-    public RouteTracker(){
+    public PathTracker(){
     }
 
     @Override
     public void initList() {
         firstPoint = new Point(1000,1000);
-        firstRoute = new Route();
-        list = new RouteLinkedList();
+        firstPath = new Path();
+        list = new CycleLinkedList();
 
-        firstRoute.add(firstPoint);
-        list.add(firstRoute);
+        firstPath.add(firstPoint);
+        list.add(firstPath);
         list.head.setSource("enter");
     }
 
     public void saveRoute(ArrayList<Float> degrees, String destination) {
 
         //get last point
-        Route lastRoute= list.tail.getRoute();
-        int lastRouteSize = lastRoute.size();
-        Point lastPoint = lastRoute.getPoints().get(lastRouteSize-1);
+        Path lastPath = list.tail.getPath();
+        int lastRouteSize = lastPath.size();
+        Point lastPoint = lastPath.getPoints().get(lastRouteSize-1);
 
-        //set first point of new route
-        Route route = new Route();
-        route.add(lastPoint);
+        //set first point of new path
+        Path path = new Path();
+        path.add(lastPoint);
 
-        //add points to new route
+        //add points to new path
         for(int i = 0; i<degrees.size(); i++){
-            Point point = route.DegreeToPoint(degrees.get(i));
-            route.add(point);
+            Point point = path.DegreeToPoint(degrees.get(i));
+            path.add(point);
         }
 
-        list.add(route);
+        list.add(path);
 
         //set source and destination
         String source = list.tail.prev.getDestination();
@@ -54,7 +52,7 @@ public class RouteTracker implements Record, Navigate {
 
     @Override
     public String toString() {
-        return "RouteTracker{" +
+        return "PathTracker{" +
                 "list=" + list.toString() +
                 '}';
     }
@@ -69,7 +67,7 @@ public class RouteTracker implements Record, Navigate {
     }
 
     @Override
-    public Node loadNode(String source, String destination) {
+    public PathNode loadNode(String source, String destination) {
         return null;
     }
 
@@ -79,7 +77,7 @@ public class RouteTracker implements Record, Navigate {
     }
 
     @Override
-    public void saveListToDB(RouteLinkedList list) {
+    public void saveListToDB(CycleLinkedList list) {
 
     }
 
