@@ -22,6 +22,7 @@ public class PathTracker implements Record, Navigate {
         firstPath.add(firstPoint);
         list.add(firstPath);
         list.head.setSource("enter");
+        list.head.setDestination("enter");
     }
 
     public void saveRoute(ArrayList<Float> degrees, String destination) {
