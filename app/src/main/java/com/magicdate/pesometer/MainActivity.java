@@ -19,8 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.magicdate.pesometer.interfaces.StepListener;
-import com.magicdate.pesometer.navigation.Route;
-import com.magicdate.pesometer.navigation.RouteTracker;
+import com.magicdate.pesometer.NavigationElements.Path;
+import com.magicdate.pesometer.NavigationElements.PathTracker;
 import com.magicdate.pesometer.senssors.stepDetector;
 
 import java.io.BufferedReader;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     EditText mEditText;
     EditText mEditTextProduct;
 
-    RouteTracker tracker;
+   PathTracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         simpleStepDetector = new stepDetector();
         simpleStepDetector.registerListener(this);
 
-        tracker = new RouteTracker();
+        tracker = new PathTracker();
         tracker.initList();
 
     }

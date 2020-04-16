@@ -1,7 +1,7 @@
 package com.magicdate.pesometer.interfaces;
 
-import com.magicdate.pesometer.navigation.Point;
-import com.magicdate.pesometer.navigation.RouteLinkedList;
+import com.magicdate.pesometer.NavigationElements.Point;
+import com.magicdate.pesometer.NavigationElements.CycleLinkedList;
 
 public interface Record{
 
@@ -15,5 +15,5 @@ public interface Record{
     public void saveNodeToDB(String source, String destination);
 
     //save all the routes when finish shopping.
-    public void saveListToDB(RouteLinkedList list);
+    public void saveListToDB(CycleLinkedList list);
 }
