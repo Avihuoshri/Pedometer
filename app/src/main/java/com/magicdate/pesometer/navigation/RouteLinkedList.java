@@ -60,7 +60,10 @@ public class RouteLinkedList {// Double Cycle Linked List
         if (head != null){
             s = s + head.getSource() + " -> " + head.getDestination() + ", ";
             for (Node n = head.next; n != head; n=n.next){
-                s = s + n.getSource() + " -> " + n.getDestination() + ", ";
+                int routeSize = n.getRoute().getPoints().size();
+                Point sourcePoint = n.getRoute().getPoints().get(0);
+                Point destPoint = n.getRoute().getPoints().get(routeSize - 1);
+                s = s + n.getSource() + " " + sourcePoint.toString() + " -> " + n.getDestination() + destPoint.toString() + ", ";
             }
             s = s.substring(0, s.length()-2);
         }

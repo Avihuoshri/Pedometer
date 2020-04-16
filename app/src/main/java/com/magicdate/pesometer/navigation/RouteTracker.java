@@ -24,6 +24,7 @@ public class RouteTracker implements Record, Navigate {
         firstRoute.add(firstPoint);
         list.add(firstRoute);
         list.head.setSource("enter");
+        list.head.setDestination("enter");
     }
 
     public void saveRoute(ArrayList<Float> degrees, String destination) {
