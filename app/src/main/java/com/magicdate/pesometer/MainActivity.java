@@ -2,24 +2,21 @@ package com.magicdate.pesometer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
+
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.magicdate.pesometer.interfaces.StepListener;
-import com.magicdate.pesometer.NavigationElements.Path;
 import com.magicdate.pesometer.NavigationElements.PathTracker;
 import com.magicdate.pesometer.senssors.stepDetector;
 
@@ -37,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private  Button BtnNext ;
     private  Button BtnTake ;
     private  Button BtnSave ;
+    private  Button BtnDrewPath ;
     private  Button BtnShowRoute ;
     private Button BtnShowProducts;
     private stepDetector simpleStepDetector;
@@ -95,6 +93,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        BtnDrewPath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GridActivity.class);
+                intent.putExtra("tracker", tracker);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         BtnTake = findViewById(R.id.btn_stop);
         BtnShowRoute = findViewById(R.id.button_show_route);
         BtnShowProducts = findViewById(R.id.button_Show_products);
+        BtnDrewPath = findViewById(R.id.btn_drew);
         mEditText = findViewById(R.id.edit_text);
         mEditTextProduct = findViewById(R.id.edit_text_product);
 

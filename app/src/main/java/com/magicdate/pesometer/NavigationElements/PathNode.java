@@ -1,6 +1,8 @@
 package com.magicdate.pesometer.NavigationElements;
 
-public class PathNode {
+import java.io.Serializable;
+
+public class PathNode implements Serializable {
     public PathNode prev, next;
     private Path path;
     private String source, destination;
@@ -32,6 +34,9 @@ public class PathNode {
 
     public String toString(){ return " "+this.path.toString() + " "; }
 
-
-
+    public boolean hasNext() {
+        if(this.next == null)
+            return false;
+        return true;
+    }
 }

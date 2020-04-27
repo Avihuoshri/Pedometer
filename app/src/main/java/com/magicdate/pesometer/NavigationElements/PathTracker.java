@@ -3,9 +3,10 @@ package com.magicdate.pesometer.NavigationElements;
 import com.magicdate.pesometer.interfaces.Navigate;
 import com.magicdate.pesometer.interfaces.Record;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PathTracker implements Record, Navigate {
+public class PathTracker implements Record, Navigate, Serializable {
     public Point firstPoint;
     public Path firstPath;
     public CycleLinkedList list;
@@ -15,7 +16,7 @@ public class PathTracker implements Record, Navigate {
 
     @Override
     public void initList() {
-        firstPoint = new Point(1000,1000);
+        firstPoint = new Point(50,50);
         firstPath = new Path();
         list = new CycleLinkedList();
 

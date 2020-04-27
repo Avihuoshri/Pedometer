@@ -1,6 +1,8 @@
 package com.magicdate.pesometer.NavigationElements;
 
-public class CycleLinkedList {// Double Cycle Linked List
+import java.io.Serializable;
+
+public class CycleLinkedList implements Serializable {// Double Cycle Linked List
 
     public PathNode head, tail;
     private int size;

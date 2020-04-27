@@ -1,8 +1,9 @@
 package com.magicdate.pesometer.NavigationElements;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Path {
+public class Path implements Serializable {
     private ArrayList<Point> points;
 
     public Path() {
