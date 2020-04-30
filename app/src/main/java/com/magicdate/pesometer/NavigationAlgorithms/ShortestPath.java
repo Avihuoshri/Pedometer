@@ -13,6 +13,8 @@ public class ShortestPath
 
     }
 
+    //This function compare the client's current path to the DB saved path between each 2 nodes
+    //and update the DB path if the client walked in a shorter path
     public ArrayList<PathNode> updateDbPaths(PathTracker clientPath  , ArrayList<PathNode> paths)
     {
         for (PathNode node : paths )
