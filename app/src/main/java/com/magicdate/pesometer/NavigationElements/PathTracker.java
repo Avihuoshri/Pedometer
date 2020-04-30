@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PathTracker implements Record, Navigate, Serializable {
-    public Point firstPoint;
+    public Point startPoint;
     public Path firstPath;
     public CycleLinkedList list;
 
@@ -16,11 +16,11 @@ public class PathTracker implements Record, Navigate, Serializable {
 
     @Override
     public void initList() {
-        firstPoint = new Point(50,50);
+        startPoint = new Point(50,50);
         firstPath = new Path();
         list = new CycleLinkedList();
 
-        firstPath.add(firstPoint);
+        firstPath.add(startPoint);
         list.add(firstPath);
         list.head.setSource("enter");
         list.head.setDestination("enter");
