@@ -1,16 +1,21 @@
 package com.magicdate.pesometer.NavigationElements;
 
+import android.util.Pair;
+
 import java.io.Serializable;
+import java.util.LinkedList;
 
 public class CycleLinkedList implements Serializable {// Double Cycle Linked List
 
     public PathNode head, tail;
     private int size;
+    private LinkedList<PathNode> shoppingLists_srcDestOnly;
 
     // Constructor,  constructs an empty list
     public CycleLinkedList(){
         head = tail = null;
         size = 0;
+        shoppingLists_srcDestOnly = new LinkedList<>();
     }
 
     // Appends the specified element to the end of this list.
@@ -59,14 +64,20 @@ public class CycleLinkedList implements Serializable {// Double Cycle Linked Lis
         String s = "[";
         if (head != null){
             s = s + head.getSource() + " -> " + head.getDestination() + ", ";
+            shoppingLists_srcDestOnly.add(head);
             for (PathNode n = head.next; n != head; n=n.next){
                 int routeSize = n.getPath().getPoints().size();
                 Point sourcePoint = n.getPath().getPoints().get(0);
                 Point destPoint = n.getPath().getPoints().get(routeSize - 1);
                 s = s + n.getSource() + " " + sourcePoint.toString() + " -> " + n.getDestination() + destPoint.toString() + ", ";
+                shoppingLists_srcDestOnly.add(n);
             }
             s = s.substring(0, s.length()-2);
         }
         return s+"]";
+    }
+
+    public LinkedList<PathNode> getShoppingLists_srcDestOnly() {
+        return shoppingLists_srcDestOnly;
     }
 }

@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.magicdate.pesometer.DataBaseHandlers.DBShoppingPathAppender;
 import com.magicdate.pesometer.interfaces.StepListener;
 import com.magicdate.pesometer.NavigationElements.PathTracker;
 import com.magicdate.pesometer.senssors.stepDetector;
@@ -102,6 +103,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
+        BtnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  String nothing = tracker.ProductsToString();
+                DBShoppingPathAppender pathAppender = new DBShoppingPathAppender();
+                pathAppender.addAllNodesOfShoppingListToDb(tracker.getList().getShoppingLists_srcDestOnly());
+            }
+        });
+
     }
 
 
@@ -119,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void initButtons(){
+        BtnSave = findViewById(R.id.button_save);
         TvSteps = findViewById(R.id.tv_steps);
         BtnNext = findViewById(R.id.btn_start);
         BtnTake = findViewById(R.id.btn_stop);

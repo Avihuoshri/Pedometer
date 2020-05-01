@@ -55,7 +55,7 @@ public class PathTracker implements Record, Navigate, Serializable {
     @Override
     public String toString() {
         return "PathTracker{" +
-                "list=" + list.toString() +
+                " list = " + list.toString() +
                 '}';
     }
 
@@ -88,5 +88,7 @@ public class PathTracker implements Record, Navigate, Serializable {
         return null;
     }
 
-
+    public CycleLinkedList getList() {
+        return list;
+    }
 }

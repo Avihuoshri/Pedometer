@@ -9,6 +9,14 @@ public class Path implements Serializable {
     public Path() {
         this.points = new ArrayList<>();
     }
+    public Path(Path other)
+    {
+        points = new ArrayList<>();
+        for (Point p : other.getPoints())
+        {
+            points.add(p);
+        }
+    }
 
     //convert degree that comes from the senssor to point on the route
     public Point DegreeToPoint(float degree){
@@ -73,7 +81,7 @@ public class Path implements Serializable {
     public String toString() {
         return "Path{" +
                 "points=" + points.toString() +
-                ", size=" + points.size() +
+                ", size = " + points.size() +
                 '}';
     }
 
