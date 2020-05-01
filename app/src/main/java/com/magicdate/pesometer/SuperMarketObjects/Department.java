@@ -6,7 +6,7 @@ public class Department
 {
     private String departmentName ;
     private ArrayList<ProductNode> depProductsList ;
-    private ArrayList<ProductNode> saleList ;
+    private ArrayList<ProductNode> saleList ; // SHOULD QUERY A BRANCH WHICH PRODUCTS OF LIST IS ON SALE. MAYBE WILL OUTPUT A DIALOG TO SUGGEST SALES .
 
 
     public Department(String departmentName)

@@ -4,7 +4,7 @@ public class ProductNode {
     private String prodactName ;
     private String productDepartment ;
     private int productID ;
-    private boolean OnSale ;
+    private boolean OnSale ; // SHOULD SEPARATE PROCESS FROM THIS CLASS. A DB QUERY WOULD FIT.
 
 
 
