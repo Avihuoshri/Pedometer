@@ -106,9 +106,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         BtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  String nothing = tracker.ProductsToString();
                 DBShoppingPathAppender pathAppender = new DBShoppingPathAppender();
-                pathAppender.addAllNodesOfShoppingListToDb(tracker.getList().getShoppingLists_srcDestOnly());
+                pathAppender.addAllNodesOfShoppingListToDb(tracker);
             }
         });
 
@@ -163,69 +162,4 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         TvSteps.setText(TEXT_NUM_STEPS + numSteps);
     }
 
-    /*
-    public void save(View v) {
-        String text = simpleStepDetector.getDegrees();
-
-        FileOutputStream fos = null;
-
-        try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-            fos.write(text.getBytes());
-
-            Toast.makeText(this, "Saved to " + getFilesDir() + "/" + FILE_NAME,
-                    Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
-
-
-    public void load(View v) {
-
-        FileInputStream fis = null;
-
-        try {
-
-            fis = openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-
-            while ((text = br.readLine()) != null) {
-                sb.append(text).append("\n");
-            }
-
-            mEditText.setText(sb.toString());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        mEditText.setText(tracker.toString() + System.lineSeparator());
-    }
-      */
-
-
-}

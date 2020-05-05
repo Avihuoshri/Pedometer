@@ -1,19 +1,13 @@
 package com.magicdate.pesometer.DataBaseObjects;
 
-import android.util.Pair;
-
-import com.magicdate.pesometer.NavigationElements.CycleLinkedList;
-import com.magicdate.pesometer.NavigationElements.Path;
 import com.magicdate.pesometer.NavigationElements.PathNode;
-import com.magicdate.pesometer.NavigationElements.Point;
+import com.magicdate.pesometer.NavigationElements.PathTracker;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShoppingPathDataBase {
     /*
@@ -39,15 +33,36 @@ public class ShoppingPathDataBase {
 
 
     private String TITLE = "ShoppingList : ";
+    private Map<String, Object> points;
+    private Map<String, Object> from_tos;
+    /*
     private LinkedList<PathNode> product_names; // BUILD FROM PATHNODE
     private LinkedList<Path> pointsAlongPath;
-
+    */
+    private PathTracker pathTracker;
     public ShoppingPathDataBase(){
         TITLE += setDate();
-        product_names = new LinkedList<>();
-        pointsAlongPath = new LinkedList<>();
+        //product_names = new LinkedList<>();
+        //pointsAlongPath = new LinkedList<>();
+        points = new HashMap<>();
+        from_tos = new HashMap<>();
     }
 
+    public Map<String, Object> getPoints() {
+        return points;
+    }
+
+    public void setPathTracker(PathTracker pathTracker) {
+        this.pathTracker = pathTracker;
+    }
+
+    public Map<String, Object> getFrom_tos() {
+        return from_tos;
+    }
+
+    public PathTracker getPathTracker() {
+        return pathTracker;
+    }
 
     private String setDate (){
         Date today = Calendar.getInstance().getTime();//getting date
@@ -56,15 +71,22 @@ public class ShoppingPathDataBase {
         return date;
 
     }
-
-    public void setProduct_names(List<PathNode> product_stops) {
+/*
+    public void setProduct_names(PathTracker product_stops) {
         for (PathNode pair : product_stops)
         {
             this.product_names.add(pair);
         }
     }
+*/
+public void setProduct_names(PathTracker product_stops) {
+    for (PathNode pair : product_stops.getList().getShoppingLists_srcDestOnly())
+    {
+        this.pathTracker.getList().getShoppingLists_srcDestOnly();
+    }
+    }
 
     public String getStartTime() {
-        return TITLE;
+        return TITLE+"/";
     }
 }
