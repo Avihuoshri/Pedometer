@@ -32,7 +32,7 @@ public class ShoppingPathDataBase {
 
 
 
-    private String TITLE = "ShoppingList : ";
+    private String TITLE;
     private Map<String, Object> points;
     private Map<String, Object> from_tos;
     /*
@@ -41,7 +41,7 @@ public class ShoppingPathDataBase {
     */
     private PathTracker pathTracker;
     public ShoppingPathDataBase(){
-        TITLE += setDate();
+        TITLE = "ShoppingList : " + this.setDate();
         //product_names = new LinkedList<>();
         //pointsAlongPath = new LinkedList<>();
         points = new HashMap<>();
@@ -66,19 +66,12 @@ public class ShoppingPathDataBase {
 
     private String setDate (){
         Date today = Calendar.getInstance().getTime();//getting date
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");//formating according to my need
+        SimpleDateFormat formatter = new SimpleDateFormat("dd:MM:yyyy HH:mm:ss");//formating according to my need
         String date = formatter.format(today);
         return date;
 
     }
-/*
-    public void setProduct_names(PathTracker product_stops) {
-        for (PathNode pair : product_stops)
-        {
-            this.product_names.add(pair);
-        }
-    }
-*/
+
 public void setProduct_names(PathTracker product_stops) {
     for (PathNode pair : product_stops.getList().getShoppingLists_srcDestOnly())
     {
