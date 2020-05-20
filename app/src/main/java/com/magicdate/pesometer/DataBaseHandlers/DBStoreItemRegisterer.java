@@ -45,4 +45,6 @@ public class DBStoreItemRegisterer extends FireBaseModel implements DataBaseSubj
     public void notifyObservers() {
 
     }
+
+
 }

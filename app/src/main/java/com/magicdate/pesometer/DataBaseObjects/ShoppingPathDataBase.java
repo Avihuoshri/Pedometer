@@ -72,12 +72,7 @@ public class ShoppingPathDataBase {
 
     }
 
-public void setProduct_names(PathTracker product_stops) {
-    for (PathNode pair : product_stops.getList().getShoppingLists_srcDestOnly())
-    {
-        this.pathTracker.getList().getShoppingLists_srcDestOnly();
-    }
-    }
+
 
     public String getStartTime() {
         return TITLE+"/";

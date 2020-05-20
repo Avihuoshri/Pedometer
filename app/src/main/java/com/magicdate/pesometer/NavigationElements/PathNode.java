@@ -7,6 +7,10 @@ public class PathNode implements Serializable {
     private Path path;
     private String source, destination;
 
+    public PathNode(){
+        path = new Path();
+    }
+
     public PathNode(Path path, PathNode prev, PathNode next){
         this.path = path;
         this.next = next;

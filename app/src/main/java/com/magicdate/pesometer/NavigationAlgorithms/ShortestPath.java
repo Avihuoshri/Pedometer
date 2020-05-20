@@ -1,5 +1,6 @@
 package com.magicdate.pesometer.NavigationAlgorithms;
 
+import com.magicdate.pesometer.DataBaseHandlers.PathParser;
 import com.magicdate.pesometer.NavigationElements.PathNode;
 import com.magicdate.pesometer.RealWorldObjects.ShoppingList ;
 import com.magicdate.pesometer.NavigationElements.PathTracker ;
@@ -12,6 +13,18 @@ public class ShortestPath
     {
 
     }
+
+    //This function gets ArrayList of String and make it a Pathnodes ArrayList.
+    private ArrayList<PathNode> stringPathsToPathNodes(ArrayList<String> stringPaths){
+        ArrayList<PathNode> paths = new ArrayList<>();
+        PathParser parser = new PathParser();
+        for(String stringPath : stringPaths){
+            PathNode path = parser.parse(stringPath);
+            paths.add(path);
+        }
+        return paths;
+    }
+
 
     //This function compare the client's current path to the DB saved path between each 2 nodes
     //and update the DB path if the client walked in a shorter path
