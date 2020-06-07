@@ -11,6 +11,16 @@ public class Point implements Serializable {
         this.j = j;
     }
 
+    public Point(String point){
+        int splitIndex = point.indexOf(',');
+        if(splitIndex != -1){
+            String iString = point.substring(0,splitIndex);
+            String jString = point.substring(splitIndex+1,point.length());
+            this.i = Integer.parseInt(iString);
+            this.j = Integer.parseInt(jString);
+        }
+
+    }
     public Point(Point point) {
         this.i = point.i;
         this.j = point.j;
