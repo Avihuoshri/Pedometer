@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 
 import com.magicdate.pesometer.DataBaseHandlers.DBShoppingPathAppender;
+import com.magicdate.pesometer.DataBaseHandlers.DBStoreBranchRegisterer;
 import com.magicdate.pesometer.interfaces.StepListener;
 import com.magicdate.pesometer.NavigationElements.PathTracker;
 import com.magicdate.pesometer.senssors.stepDetector;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final String FILE_NAME = "degrees.txt";
     EditText mEditText;
     EditText mEditTextProduct;
+    private static final String CHOOSEN_BRANCH = "Ron's All Goods Store";
 
    PathTracker tracker;
 
@@ -108,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View v) {
                 DBShoppingPathAppender pathAppender = new DBShoppingPathAppender();
                 pathAppender.addAllNodesOfShoppingListToDb(tracker);
+                DBStoreBranchRegisterer branchRegisterer = new DBStoreBranchRegisterer();
+                branchRegisterer.handleBranchStock(tracker);
             }
         });
 

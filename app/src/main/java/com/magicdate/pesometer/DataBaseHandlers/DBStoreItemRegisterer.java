@@ -43,6 +43,8 @@ public class DBStoreItemRegisterer extends FireBaseModel implements DataBaseSubj
 
     @Override
     public void notifyObservers() {
+        String s = " i , am ,appool" ;
 
     }
+
 }
